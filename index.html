@@ -157,6 +157,13 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.6rem; }
 .tools li { font-size: 0.82rem; font-weight: 500; padding: 0.2rem 0.65rem; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); }
 
+/* ===== Project cards (text only) ===== */
+.project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 760px) { .project-grid { grid-template-columns: minmax(0, 1fr); } }
+.project { border-top: 4px solid var(--accent); }
+.project-body { padding: 1.8rem; }
+.project-body h3 { font-size: 1.25rem; margin-bottom: 0.8rem; }
+
 /* ===== Leadership ===== */
 .lead-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1.6rem; }
 .lead-card { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: var(--radius); padding: 1.8rem; }
@@ -330,7 +337,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
         <li>Bluebeam</li>
         <li>Hourly Analysis Program</li>
         <li>Arduino</li>
-        <li>Teamcenter</li>
+        <li>Siemens Teamcenter</li>
         <li>DOORS</li>
       </ul>
     </section>
@@ -338,29 +345,37 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
     <!-- ================= PROJECTS ================= -->
     <section id="projects" class="section wrap">
       <div class="section-head">
-        <p class="eyebrow">Projects</p>
-        <h2>Selected work</h2>
-      </div>
-
-      <div class="filters" role="group" aria-label="Filter projects">
-        <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter" data-filter="work" aria-pressed="false">Work</button>
-        <button class="filter" data-filter="competition" aria-pressed="false">Competition</button>
-        <button class="filter" data-filter="school" aria-pressed="false">Coursework</button>
-        <button class="filter" data-filter="industry" aria-pressed="false">Industry</button>
+        <h2>Projects</h2>
       </div>
 
       <div class="project-grid">
-        <!-- To add a project: copy one <article> block, fill it in, set data-cat
-             (work, competition, school, or industry), and add an image.
-             To rename a filter, change its label above AND its data-filter value to match data-cat. -->
-        <article class="project" data-cat="work">
-          <div class="project-img"><img src="images/project-1.jpg" alt="" data-fallback="" loading="lazy"></div>
+        <!-- To add a project: copy one <article> block and edit the date line, title, and description. -->
+        <article class="project">
           <div class="project-body">
-            <p class="project-tag"><!-- Org, year --></p>
-            <h3><!-- Project title --></h3>
-            <p><!-- Description --></p>
-            <ul class="tools"><li></li></ul>
+            <p class="project-tag">Automotive Research · Jan 2026 - Jun 2026</p>
+            <h3>Automotive Ethernet Vehicle Research</h3>
+            <p>Researched alongside a multidisciplinary group of electrical and mechanical engineering students to understand Ethernet connections and applications in the automotive industry. I conducted research to identify Ethernet standards for specific cases and researched how these cases could be applied to achieve target outcomes.</p>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-body">
+            <p class="project-tag">Aug 2025 - Present</p>
+            <h3>AI-Guided UGV Stone Fruit Harvesting System</h3>
+            <p>This project aims to develop an automated fruit harvesting arm designed to address the growing labor shortages in agriculture and to reduce the significant produce waste resulting from unharvested crops. The proposed system integrates a multi-degree-of-freedom gripper arm, an extension arm, a telescopic arm mechanism, and a computer-vision subsystem capable of identifying and localizing ripe fruit in real time. Through iterative concept generation and evaluation, it was decided to use a suction-based gripper, an extension, and a telescopic arm optimized for reach and mobility.</p>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-body">
+            <p class="project-tag">Ars Vallis Ingenium Robotics · Aug 2025 - May 2026</p>
+            <h3>Propulsion and Chassis Design</h3>
+            <p>Working alongside a multidisciplinary team of students to design and develop the propulsion and chassis systems for a remotely operated vehicle (ROV). In this project, I designed prototypes in CAD for the tether and strain relief system, focusing on neutral buoyancy and strength, while also creating a cost-effective bill of materials. I also worked with a smaller subteam of mechanical engineering students to model legs in SolidWorks to adapt to the chassis and enhance stability.</p>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-body">
+            <p class="project-tag">Sep 2023 - Jan 2024</p>
+            <h3>Reducing Noise Pollution in Endoscopy Suites</h3>
+            <p>For this research key components include conducting research for reducing noise pollution in an endoscopy suite, to enhance user experience for healthcare providers. It was important that the team of students effectively communicate with a local gastroenterologist to align project goals and progress as well as test modifications on existing equipment. Another task was to utilize programs such as SolidWorks to understand the machine's functionality and create prototypes, facilitating material selection and failure analysis.</p>
           </div>
         </article>
       </div>
@@ -380,7 +395,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
         <article class="lead-card">
           <h3>SUNDOGS Renewable Energy</h3>
           <p class="lead-role">Secretary · 2023 – 2025</p>
-          <p>SUNDOGS Renewable Energy is part of the Association of Energy Engineers. As Secretary, I led presentations at general meetings, coordinated guest speaker events with local industry members, and informed students about the different types of renewable energy.</p>
+          <p>As Secretary of the Sundogs Renewable Energy Club, my mission is to educate students about various forms of energy in the industry. This task comes with organizing guest speaker sessions and facility tours to connect students with local engineers and industry professionals, planning outreach events to promote awareness of renewable energy solutions, and coordinating general meetings to facilitate discussions on current topics in renewable energy. Responsibilities also included leading research initiatives focused on developing a solar panel charging station to demonstrate practical applications of renewable technology.</p>
         </article>
       </div>
     </section>
@@ -388,8 +403,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
     <!-- ================= CONTACT ================= -->
     <section id="contact" class="contact">
       <div class="wrap">
-        <p class="eyebrow">Contact</p>
-        <h2>Let's build something.</h2>
+        <h2>Contact me!</h2>
         <div class="contact-buttons">
           <a class="btn btn-primary" href="https://www.linkedin.com/in/nataliemaciel-/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5M12 13a2.5 2.5 0 0 1 5 0v3"/></svg>
