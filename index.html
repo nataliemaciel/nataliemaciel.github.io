@@ -8,7 +8,177 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+/* ===== Tokens ===== */
+:root {
+  --bg: #FBFEFB;          /* very light green */
+  --bg-deep: #F2F8F3;     /* wave, contact band */
+  --surface: #FFFFFF;
+  --ink: #1E2B22;
+  --muted: #5B6B5F;
+  --line: #E2ECE4;
+  --accent: #3D6B4E;      /* darker green: buttons, links, icons */
+  --accent-hover: #2C5139;
+  --on-accent: #FFFFFF;
+  --radius: 14px;
+  --font: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --nav-h: 68px;
+  box-sizing: border-box;
+}
+*, *::before, *::after { box-sizing: inherit; }
+
+:root[data-theme="dark"] {
+  --bg: #0F1914; --bg-deep: #15231B; --surface: #17251D; --ink: #E5EFE7; --muted: #9CB0A1;
+  --line: #263A2E; --accent: #7DBB93; --accent-hover: #A0D2B2; --on-accent: #0B1510;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1914; --bg-deep: #15231B; --surface: #17251D; --ink: #E5EFE7; --muted: #9CB0A1;
+    --line: #263A2E; --accent: #7DBB93; --accent-hover: #A0D2B2; --on-accent: #0B1510;
+  }
+}
+
+/* ===== Base ===== */
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 12px); }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem; line-height: 1.7; }
+h1, h2, h3 { margin: 0; line-height: 1.2; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.3rem, 5vw, 3.4rem); font-weight: 600; }
+h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); font-weight: 600; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0 0 1rem; }
+a { color: var(--accent); text-underline-offset: 4px; }
+img { max-width: 100%; display: block; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(1120px, 100% - 2.5rem); margin-inline: auto; }
+.section { padding: 5rem 0 1rem; }
+.section-head { margin-bottom: 2.5rem; }
+.eyebrow { font-weight: 500; font-size: 0.95rem; color: var(--accent); margin-bottom: 0.4rem; }
+
+/* Hide any element left empty so unused template slots stay invisible */
+.eyebrow:empty, .project-tag:empty, .tools li:empty,
+.project-body p:empty, .project-body h3:empty { display: none; }
+
+/* ===== Nav ===== */
+.nav { position: sticky; top: 0; z-index: 50; height: var(--nav-h); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); }
+.nav-inner { width: min(1200px, 100% - 2.5rem); height: 100%; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.brand { font-weight: 500; font-size: 1.15rem; color: var(--ink); text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: 1.8rem; margin-left: auto; margin-right: 1.2rem; }
+.nav-links a { color: var(--ink); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+.nav-links a:hover, .nav-links a.is-current { color: var(--accent); }
+.nav-tools { display: flex; align-items: center; gap: 0.3rem; }
+.theme-btn, .menu-btn { background: none; border: 0; width: 44px; height: 44px; display: grid; place-items: center; color: var(--ink); cursor: pointer; border-radius: 50%; }
+.theme-btn:hover { color: var(--accent); }
+.menu-btn { display: none; position: relative; }
+.menu-btn span { position: absolute; left: 11px; right: 11px; height: 2px; background: var(--ink); transition: transform 0.2s, top 0.2s; }
+.menu-btn span:first-child { top: 17px; }
+.menu-btn span:last-child { top: 25px; }
+.menu-btn[aria-expanded="true"] span:first-child { top: 21px; transform: rotate(45deg); }
+.menu-btn[aria-expanded="true"] span:last-child { top: 21px; transform: rotate(-45deg); }
+
+@media (max-width: 860px) {
+  .menu-btn { display: grid; }
+  .nav-links { position: absolute; top: var(--nav-h); left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; margin: 0; padding: 0.5rem 1.25rem 1.25rem; background: var(--bg); border-bottom: 1px solid var(--line); display: none; }
+  .nav-links.is-open { display: flex; }
+  .nav-links a { padding: 0.7rem 0; width: 100%; }
+}
+
+/* ===== Hero: text on the left, photo on the right ===== */
+.hero { position: relative; padding: 3.5rem 0 0; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 3rem; align-items: center; padding-bottom: 5.5rem; }
+.hero-text { min-width: 0; }
+.hero-role { font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 500; color: var(--muted); margin: 0.4rem 0 1.2rem; }
+.hero-sub { font-size: 1.1rem; color: var(--muted); max-width: 46ch; margin-bottom: 2.2rem; }
+.btn { display: inline-flex; align-items: center; gap: 0.8rem; padding: 1rem 1.5rem; border-radius: 8px; font-weight: 600; font-size: 1.05rem; text-decoration: none; white-space: nowrap; transition: background 0.15s; }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { background: var(--accent-hover); }
+.hero-photo { margin: 0; display: flex; justify-content: center; min-width: 0; }
+.photo-card { position: relative; width: min(100%, 380px); aspect-ratio: 4 / 5; overflow: hidden; border-radius: 22px; background: var(--bg-deep); border: 1px solid var(--line); }
+.photo-card img, .photo-card .img-fallback { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
+.photo-card figcaption {
+  position: absolute; left: 0.9rem; right: 0.9rem; bottom: 0.9rem; display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.8rem 1rem; border-radius: 14px; font-size: 0.92rem; font-weight: 500; line-height: 1.4;
+  background: color-mix(in srgb, var(--surface) 88%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--line);
+}
+.dot { flex: none; width: 12px; height: 12px; border-radius: 50%; background: #3FB86B; box-shadow: 0 0 0 5px color-mix(in srgb, #3FB86B 25%, transparent); margin-left: 4px; }
+.hero-wave { position: absolute; left: 0; bottom: -1px; width: 100%; height: 90px; fill: var(--bg-deep); pointer-events: none; }
+
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 1.8rem; padding-bottom: 4.5rem; }
+  .hero-photo { order: -1; }
+  .photo-card { width: min(88%, 340px); }
+}
+
+/* ===== About ===== */
+.about-text { max-width: 68ch; }
+.about-text .btn { margin-top: 1rem; }
+
+/* ===== Horizontal timeline (Education + Experience) ===== */
+.ht-scroll { overflow-x: auto; padding-bottom: 0.75rem; }
+.htimeline {
+  display: grid; grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr)); grid-template-rows: auto auto auto;
+  width: 100%; min-width: calc(var(--n, 2) * 140px + 140px); padding-inline: 70px; margin-inline: auto;
+}
+.htimeline.compact { max-width: 720px; }
+.ht { display: grid; grid-row: span 3; grid-template-rows: subgrid; min-width: 0; }
+.ht-top { align-self: end; display: flex; flex-direction: column; align-items: center; }
+.ht-bottom { align-self: start; display: flex; flex-direction: column; align-items: center; }
+.ht-rail { position: relative; height: 16px; }
+.ht-rail::before { content: ""; position: absolute; left: 0; right: 0; top: 7px; height: 2px; background: color-mix(in srgb, var(--accent) 45%, transparent); }
+.ht:first-child .ht-rail::before { left: 50%; }
+.ht:last-child .ht-rail::before { right: 50%; }
+.ht-rail::after { content: ""; position: absolute; left: 50%; top: 0; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%; background: var(--accent); }
+.ht.is-current .ht-rail::after { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent); }
+.ht-stem { width: 2px; height: 26px; background: color-mix(in srgb, var(--accent) 45%, transparent); }
+.ht-circle { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 2px solid var(--accent); color: var(--accent); }
+.ht-text { width: min(calc(200% - 1rem), 300px); text-align: center; margin: 0.8rem 0; }
+.ht-text h3 { font-size: 0.97rem; font-weight: 600; line-height: 1.35; margin-bottom: 0.25rem; }
+.ht-text p { margin: 0; font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
+.ht-date { margin: 0; font-weight: 600; font-size: 0.92rem; color: var(--accent); text-align: center; line-height: 1.35; padding: 0.75rem 0.25rem; }
+
+/* ===== Tools ===== */
+.tool-chips { display: flex; flex-wrap: wrap; gap: 0.8rem; max-width: 860px; }
+.tool-chips li { font-weight: 500; padding: 0.6rem 1.3rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); }
+
+/* ===== Projects ===== */
+.filters { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
+.filter { font: inherit; font-weight: 500; font-size: 0.93rem; padding: 0.45rem 1.1rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; transition: background 0.15s, color 0.15s; }
+.filter:hover { border-color: var(--accent); }
+.filter.is-active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
+.project { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.project[hidden] { display: none; }
+.project-img { aspect-ratio: 16 / 10; background: var(--bg-deep); overflow: hidden; }
+.project-img img, .img-fallback { width: 100%; height: 100%; object-fit: cover; }
+.project-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+.project-tag { font-weight: 500; font-size: 0.88rem; color: var(--accent); margin-bottom: 0.4rem; }
+.project-body h3 { margin-bottom: 0.7rem; }
+.project-body p:not(.project-tag) { color: var(--muted); font-size: 0.97rem; }
+.tools { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.6rem; }
+.tools li { font-size: 0.82rem; font-weight: 500; padding: 0.2rem 0.65rem; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); }
+
+/* ===== Leadership ===== */
+.lead-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 1.6rem; }
+.lead-card { background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: var(--radius); padding: 1.8rem; }
+.lead-card h3 { font-size: 1.25rem; margin-bottom: 0.3rem; }
+.lead-role { color: var(--accent); font-weight: 500; margin-bottom: 1rem; }
+.lead-card p:last-child { color: var(--muted); margin-bottom: 0; }
+
+/* ===== Contact ===== */
+.contact { margin-top: 5rem; padding: 5rem 0; background: var(--bg-deep); }
+.contact h2 { margin-bottom: 1.6rem; }
+.contact-buttons { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+/* ===== Footer ===== */
+.footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 2rem 0; color: var(--muted); font-size: 0.92rem; }
+.footer p { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+
+  </style>
 </head>
 <body>
 
@@ -37,7 +207,6 @@
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="hero-grid wrap">
-
       <div class="hero-text">
         <h1>Natalie Maciel</h1>
         <p class="hero-role">Mechanical Engineer</p>
@@ -69,8 +238,8 @@
         <h2>About Me</h2>
       </div>
       <div class="about-text">
-        <p>I am a first-generation Mechanical Engineering Graduate Student at California State University, Fresno. I enjoy working in fast-paced environments that allow me to exercise my skills in CAD modeling, design, systems integration, and manufacturing.</p>
-        <p>I approach engineering challenges by utilizing existing resources to create efficient solutions. I enjoy troubleshooting and improving existing designs, taking the initiative to turn concepts into products. I consistently find myself in a leadership position, working to guide my peers towards innovative, structured solutions.</p>
+        <p>I am a first-generation mechanical engineering graduate student at California State University, Fresno. I enjoy working in fast-paced environments that allow me to exercise my skills in CAD modeling, design, systems integration, and manufacturing.</p>
+        <p>I approach engineering challenges by utilizing existing resources to create efficient solutions. I enjoy troubleshooting and improving existing designs, taking the initiative to turn concepts into products. I consistently find myself in leadership positions, working to guide my peers toward innovative, structured solutions.</p>
         <a class="btn btn-primary" href="resume.pdf" download="Natalie_Maciel_Resume.pdf">
           Download Resume
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>
@@ -83,19 +252,21 @@
       <div class="section-head">
         <h2>Education</h2>
       </div>
-      <!-- Newest first. To add an entry, copy one <li>. -->
-      <ol class="vtimeline">
-        <li class="entry is-current">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg> M.S. in Mechanical Engineering</h3>
-          <p class="entry-org">California State University, Fresno</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> 2026 - 2027</p>
-        </li>
-        <li class="entry">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg> B.S. in Mechanical Engineering</h3>
-          <p class="entry-org">California State University, Fresno</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> 2022 - 2026</p>
-        </li>
-      </ol>
+      <!-- Oldest on the left, newest on the right. -->
+      <div class="ht-scroll">
+        <ol class="htimeline compact" style="--n:2">
+          <li class="ht">
+            <div class="ht-top"><div class="ht-text"><h3>B.S. in Mechanical Engineering</h3><p>California State University, Fresno</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div class="ht-stem"></div></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><p class="ht-date">2022 - 2026</p></div>
+          </li>
+          <li class="ht is-current">
+            <div class="ht-top"><p class="ht-date">2026 - 2027</p></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><div class="ht-stem"></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div class="ht-text"><h3>M.S. in Mechanical Engineering</h3><p>California State University, Fresno</p></div></div>
+          </li>
+        </ol>
+      </div>
     </section>
 
     <!-- ================= EXPERIENCE ================= -->
@@ -103,75 +274,65 @@
       <div class="section-head">
         <h2>Experience</h2>
       </div>
-      <!-- Newest first. To add a job, copy one <li>. -->
-      <ol class="vtimeline">
-        <li class="entry">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> AY Teaching Associate, Engineering Graphics</h3>
-          <p class="entry-org">Fresno State, Lyles College of Engineering</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Aug 2026 - Present</p>
-        </li>
-        <li class="entry">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> F3 Innovation Graduate Student Researcher, AI-Guided UGV Stone Fruit Harvesting System</h3>
-          <p class="entry-org">Fresno State, Lyles College of Engineering</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Aug 2026 - Present</p>
-        </li>
-        <li class="entry">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> Systems Design Intern</h3>
-          <p class="entry-org">Northrop Grumman</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Jun 2026 - Present</p>
-        </li>
-        <li class="entry">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> LCOE Pathways Tutor</h3>
-          <p class="entry-org">Fresno State, Lyles College of Engineering</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Aug 2025 - May 2026</p>
-        </li>
-        <li class="entry">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> Manufacturing Engineering Intern</h3>
-          <p class="entry-org">Northrop Grumman</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> May 2025 - Jul 2025</p>
-        </li>
-        <li class="entry">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> Engineering Design Intern</h3>
-          <p class="entry-org">Lawrence Engineering Group</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Apr 2024 - Apr 2025</p>
-        </li>
-        <li class="entry">
-          <h3><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg> Private STEAM Tutor</h3>
-          <p class="entry-org">Self-employed</p>
-          <p class="entry-date"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Jul 2020 - May 2025</p>
-        </li>
-      </ol>
+      <!-- Oldest on the left, newest on the right. -->
+      <div class="ht-scroll">
+        <ol class="htimeline" style="--n:7">
+          <li class="ht">
+            <div class="ht-top"><div class="ht-text"><h3>Private STEAM Tutor</h3><p>Self-employed</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div class="ht-stem"></div></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><p class="ht-date">Jul 2020 - May 2025</p></div>
+          </li>
+          <li class="ht">
+            <div class="ht-top"><p class="ht-date">Apr 2024 - Mar 2025</p></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><div class="ht-stem"></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></div><div class="ht-text"><h3>HVAC Design Engineering Intern</h3><p>Lawrence Engineering Group</p></div></div>
+          </li>
+          <li class="ht">
+            <div class="ht-top"><div class="ht-text"><h3>Manufacturing Engineering Intern</h3><p>Northrop Grumman</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div><div class="ht-stem"></div></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><p class="ht-date">May 2025 - Jul 2025</p></div>
+          </li>
+          <li class="ht">
+            <div class="ht-top"><p class="ht-date">Aug 2025 - May 2026</p></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><div class="ht-stem"></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div class="ht-text"><h3>LCOE Pathways Tutor</h3><p>Fresno State, Lyles College of Engineering</p></div></div>
+          </li>
+          <li class="ht">
+            <div class="ht-top"><div class="ht-text"><h3>Systems Design Intern</h3><p>Northrop Grumman</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div><div class="ht-stem"></div></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><p class="ht-date">Jun 2026 - Present</p></div>
+          </li>
+          <li class="ht">
+            <div class="ht-top"><p class="ht-date">Aug 2026 - Present</p></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><div class="ht-stem"></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div class="ht-text"><h3>AY Teaching Associate, Engineering Graphics</h3><p>Fresno State, Lyles College of Engineering</p></div></div>
+          </li>
+          <li class="ht is-current">
+            <div class="ht-top"><div class="ht-text"><h3>F3 Innovation Graduate Student Researcher, AI-Guided UGV Stone Fruit Harvesting System</h3><p>Fresno State, Lyles College of Engineering</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L5 19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l-5-10V3"/><path d="M7.5 15h9"/></svg></div><div class="ht-stem"></div></div>
+            <div class="ht-rail"></div>
+            <div class="ht-bottom"><p class="ht-date">Aug 2026 - Present</p></div>
+          </li>
+        </ol>
+      </div>
     </section>
 
     <!-- ================= EXPERTISE ================= -->
     <section id="expertise" class="section wrap">
       <div class="section-head">
-        <p class="eyebrow">Expertise</p>
-        <h2>Tools I use</h2>
+        <h2>Tools</h2>
       </div>
-      <div class="skill-grid">
-        <!-- Copy a skill-card to add a category. Each skill is one <li>. -->
-        <div class="skill-card">
-          <h3>CAD and design</h3>
-          <ul class="chips"><li></li></ul>
-        </div>
-        <div class="skill-card">
-          <h3>Analysis</h3>
-          <ul class="chips"><li></li></ul>
-        </div>
-        <div class="skill-card">
-          <h3>Programming</h3>
-          <ul class="chips"><li></li></ul>
-        </div>
-        <div class="skill-card">
-          <h3>Test and hardware</h3>
-          <ul class="chips"><li></li></ul>
-        </div>
-        <div class="skill-card">
-          <h3>Manufacturing</h3>
-          <ul class="chips"><li></li></ul>
-        </div>
-      </div>
+      <ul class="tool-chips">
+        <li>MATLAB</li>
+        <li>C++</li>
+        <li>SolidWorks</li>
+        <li>AutoCAD</li>
+        <li>EnergyPro</li>
+        <li>Bluebeam</li>
+        <li>Hourly Analysis Program</li>
+        <li>Arduino</li>
+        <li>Teamcenter</li>
+        <li>DOORS</li>
+      </ul>
     </section>
 
     <!-- ================= PROJECTS ================= -->
@@ -191,7 +352,7 @@
 
       <div class="project-grid">
         <!-- To add a project: copy one <article> block, fill it in, set data-cat
-             (work, competition, school, or industry), and put the image in the images folder.
+             (work, competition, school, or industry), and add an image.
              To rename a filter, change its label above AND its data-filter value to match data-cat. -->
         <article class="project" data-cat="work">
           <div class="project-img"><img src="images/project-1.jpg" alt="" data-fallback="" loading="lazy"></div>
@@ -200,7 +361,6 @@
             <h3><!-- Project title --></h3>
             <p><!-- Description --></p>
             <ul class="tools"><li></li></ul>
-            <!-- Optional: <a class="project-link" href="report.pdf" target="_blank" rel="noopener">Link text</a> -->
           </div>
         </article>
       </div>
@@ -209,24 +369,19 @@
     <!-- ================= LEADERSHIP ================= -->
     <section id="leadership" class="section wrap">
       <div class="section-head">
-        <p class="eyebrow">Leadership</p>
-        <h2>Beyond the classroom</h2>
+        <h2>Leadership</h2>
       </div>
-      <div class="lead-grid">
-        <article class="lead-main">
-          <div class="lead-img"><img src="images/leadership.jpg" alt="" data-fallback="" loading="lazy"></div>
-          <div>
-            <p class="project-tag"><!-- Dates --></p>
-            <h3><!-- Main role --></h3>
-            <p><!-- Description --></p>
-          </div>
+      <div class="lead-cards">
+        <article class="lead-card">
+          <h3>Society of Women Engineers</h3>
+          <p class="lead-role">Social Chair · Aug 2026 – Present</p>
+          <p>The Society of Women Engineers (SWE) is a community dedicated to empowering women in engineering. Our values include integrity, inclusion, and technical support. As Social Chair of SWE, I am responsible for hosting regular networking events that encourage club members to connect with peers and local industry members, learn about career resources, and support diversity and inclusion.</p>
         </article>
-        <div class="lead-side">
-          <!-- Copy a lead-item to add another role or activity -->
-          <div class="lead-item"><h3></h3><p></p></div>
-          <div class="lead-item"><h3></h3><p></p></div>
-          <div class="lead-item"><h3></h3><p></p></div>
-        </div>
+        <article class="lead-card">
+          <h3>SUNDOGS Renewable Energy</h3>
+          <p class="lead-role">Secretary · 2023 – 2025</p>
+          <p>SUNDOGS Renewable Energy is part of the Association of Energy Engineers. As Secretary, I led presentations at general meetings, coordinated guest speaker events with local industry members, and informed students about the different types of renewable energy.</p>
+        </article>
       </div>
     </section>
 
@@ -235,11 +390,15 @@
       <div class="wrap">
         <p class="eyebrow">Contact</p>
         <h2>Let's build something.</h2>
-        <a class="contact-email" href="mailto:nataliemaciell2004@gmail.com">nataliemaciell2004@gmail.com</a>
-        <div class="contact-links">
-          <a href="https://www.linkedin.com/in/nataliemaciel-" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/nataliemaciel" target="_blank" rel="noopener">GitHub</a>
-          <a href="resume.pdf" target="_blank" rel="noopener">Résumé</a>
+        <div class="contact-buttons">
+          <a class="btn btn-primary" href="https://www.linkedin.com/in/nataliemaciel-/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5M12 13a2.5 2.5 0 0 1 5 0v3"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=nataliemaciell2004@gmail.com" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Email
+          </a>
         </div>
       </div>
     </section>
@@ -250,6 +409,97 @@
     <a href="#top">Back to top</a>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Theme toggle (remembers choice; otherwise follows the device setting)
+const root = document.documentElement;
+const themeBtn = document.querySelector('.theme-btn');
+
+function currentTheme() {
+  return root.dataset.theme ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+}
+function applyTheme(theme) {
+  root.dataset.theme = theme;
+  themeBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+}
+try {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'dark' || saved === 'light') root.dataset.theme = saved;
+} catch (e) { /* storage unavailable: ignore */ }
+applyTheme(currentTheme());
+
+themeBtn.addEventListener('click', () => {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try { localStorage.setItem('theme', next); } catch (e) { /* ignore */ }
+});
+
+// Mobile menu
+const menuBtn = document.querySelector('.menu-btn');
+const navLinks = document.getElementById('nav-links');
+
+function setMenu(open) {
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  navLinks.classList.toggle('is-open', open);
+}
+menuBtn.addEventListener('click', () => {
+  setMenu(menuBtn.getAttribute('aria-expanded') !== 'true');
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+// Highlight the nav link for the section on screen
+const sections = [...navLinks.querySelectorAll('a')]
+  .map(a => ({ a, el: document.querySelector(a.getAttribute('href')) }))
+  .filter(s => s.el);
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        sections.forEach(s => s.a.classList.toggle('is-current', s.el === entry.target));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => io.observe(s.el));
+}
+
+// Project filters
+const filters = document.querySelectorAll('.filter');
+const projects = document.querySelectorAll('.project');
+
+filters.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.filter;
+    filters.forEach(f => {
+      const active = f === btn;
+      f.classList.toggle('is-active', active);
+      f.setAttribute('aria-pressed', String(active));
+    });
+    projects.forEach(p => {
+      p.hidden = !(cat === 'all' || p.dataset.cat === cat);
+    });
+  });
+});
+
+// Image fallback: if an image is missing, show a neutral block
+document.querySelectorAll('img[data-fallback]').forEach(img => {
+  const swap = () => {
+    const box = document.createElement('div');
+    box.className = 'img-fallback';
+    box.setAttribute('role', 'img');
+    box.setAttribute('aria-label', img.alt || '');
+    box.style.cssText = 'display:flex;align-items:center;justify-content:center;font-weight:600;font-size:1.4rem;color:var(--muted);';
+    box.textContent = img.dataset.fallback || '';
+    img.replaceWith(box);
+  };
+  img.addEventListener('error', swap);
+  if (img.complete && img.naturalWidth === 0) swap();
+});
+
+  </script>
 </body>
 </html>
