@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dana Martinez Gonzalez | Portfolio</title>
-  <meta name="description" content="">
+  <title>Natalie Maria Maciel | Portfolio</title>
+  <meta name="description" content="Natalie Maria Maciel, mechanical engineer focused on systems and design engineering.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,67 +15,70 @@
   <!-- ================= NAV ================= -->
   <header class="nav" id="top">
     <div class="nav-inner">
-      <a class="brand" href="#top">Dana Martinez Gonzalez</a>
-      <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
-        <span></span><span></span>
-      </button>
+      <a class="brand" href="#top">Natalie Maria Maciel</a>
       <nav class="nav-links" id="nav-links" aria-label="Main">
         <a href="#about">About</a>
-        <a href="#experience">Experience</a>
+        <a href="#expertise">Expertise</a>
         <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
         <a href="#leadership">Leadership</a>
-        <a href="#recognition">Recognition</a>
-        <a href="#contact" class="nav-cta">Contact</a>
+        <a href="#contact">Contact me</a>
       </nav>
+      <div class="nav-tools">
+        <button class="theme-btn" type="button" aria-label="Switch to dark mode">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+        <button class="menu-btn" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+          <span></span><span></span>
+        </button>
+      </div>
     </div>
   </header>
 
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="hero-grid wrap">
+
+      <ul class="socials" aria-label="Links">
+        <li>
+          <a href="https://www.linkedin.com/in/nataliemaciel-" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5M12 13a2.5 2.5 0 0 1 5 0v3"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/nataliemaciel" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="resume.pdf" target="_blank" rel="noopener" aria-label="Résumé">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+          </a>
+        </li>
+      </ul>
+
       <div class="hero-text">
-        <p class="eyebrow"><!-- Short line above the headline --></p>
-        <h1><!-- Headline --></h1>
-        <p class="hero-sub"><!-- Intro sentence --></p>
-        <div class="hero-buttons">
-          <a class="btn btn-primary" href="#projects">View projects</a>
-          <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noopener">Résumé</a>
-          <a class="btn btn-ghost" href="portfolio.pdf" target="_blank" rel="noopener">Portfolio PDF</a>
-        </div>
-        <div class="hero-links">
-          <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="#" target="_blank" rel="noopener">GitHub</a>
-          <a href="mailto:">Email</a>
-        </div>
+        <h1>Natalie Maciel</h1>
+        <p class="hero-role">Mechanical Engineer</p>
+        <p class="hero-sub">I am passionate about systems and design engineering, specializing in the integration and optimization of subsystems.</p>
+        <a class="btn btn-primary" href="#contact">
+          Contact Me
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>
+        </a>
       </div>
 
       <figure class="hero-photo">
-        <!-- IMAGE: put your headshot at images/headshot.jpg -->
-        <img src="images/headshot.jpg" alt="Headshot" data-fallback="">
-        <figcaption>
-          <span class="dot"></span> <!-- Current status -->
-        </figcaption>
+        <div class="photo-card">
+          <img src="images/headshot.jpg" alt="Natalie Maciel in a graduation cap and gown with a Fresno State stole" data-fallback="">
+          <figcaption>
+            <span class="dot"></span>
+            <span>Currently: Northrop Grumman, Systems Design Engineer</span>
+          </figcaption>
+        </div>
       </figure>
     </div>
 
-    <div class="wrap">
-      <!-- Stats: copy one <div> per stat. Put the label in <dt> and the value in <dd>. -->
-      <dl class="stats">
-        <div><dt></dt><dd></dd></div>
-        <div><dt></dt><dd></dd></div>
-        <div><dt></dt><dd></dd></div>
-        <div><dt></dt><dd></dd></div>
-      </dl>
-    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40C240 100 520 110 820 70S1280 0 1440 20V120H0z"/></svg>
   </section>
-
-  <!-- ================= FEATURED ================= -->
-  <div class="featured wrap">
-    <span class="featured-label">Featured</span>
-    <p><!-- Featured blurb --></p>
-    <a href="#recognition"><!-- Link text --></a>
-  </div>
 
   <main>
     <!-- ================= ABOUT ================= -->
@@ -84,19 +87,47 @@
         <p class="eyebrow">About</p>
         <h2>Engineering that leaves the screen</h2>
       </div>
-      <div class="about-grid">
-        <div class="about-text">
-          <p><!-- Paragraph 1 --></p>
-          <p><!-- Paragraph 2 --></p>
-        </div>
-        <!-- Quick facts: <li><span>Label</span>Value</li> -->
-        <ul class="about-facts">
-          <li><span></span></li>
-          <li><span></span></li>
-          <li><span></span></li>
-          <li><span></span></li>
-        </ul>
+      <div class="about-text">
+        <p>I am a first-generation Mechanical Engineering Graduate Student at California State University, Fresno. I enjoy working in fast-paced environments that allow me to exercise my skills in CAD modeling, design, systems integration, and manufacturing.</p>
+        <p>I approach engineering challenges by utilizing existing resources to create efficient solutions. I enjoy troubleshooting and improving existing designs, taking the initiative to turn concepts into products. I consistently find myself in a leadership position, working to guide my peers towards innovative, structured solutions.</p>
+        <a class="btn btn-primary" href="resume.pdf" download="Natalie_Maciel_Resume.pdf">
+          Download Resume
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/></svg>
+        </a>
       </div>
+    </section>
+
+    <!-- ================= QUALIFICATIONS ================= -->
+    <section id="qualifications" class="section wrap">
+      <div class="section-head center">
+        <h2>Qualifications</h2>
+      </div>
+
+      <!-- Newest first. To add an entry, copy one <li>. -->
+      <ol class="qual-timeline">
+        <li class="qual is-current">
+          <h3>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+            M.S. in Mechanical Engineering
+          </h3>
+          <p class="qual-org">California State University, Fresno</p>
+          <p class="qual-date">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+            2026 - 2027
+          </p>
+        </li>
+        <li class="qual">
+          <h3>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+            B.S. in Mechanical Engineering
+          </h3>
+          <p class="qual-org">California State University, Fresno</p>
+          <p class="qual-date">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+            2022 - 2026
+          </p>
+        </li>
+      </ol>
     </section>
 
     <!-- ================= EXPERIENCE ================= -->
@@ -109,55 +140,102 @@
       <ol class="timeline">
         <!-- To add a job: copy one <li class="job"> block. Newest first. -->
         <li class="job">
-          <div class="job-when"><!-- Dates --></div>
+          <div class="job-when">Aug 2026 to Present</div>
           <div class="job-body">
-            <h3><!-- Job title --></h3>
-            <p class="job-org"><!-- Organization --></p>
+            <h3>AY Teaching Associate, Engineering Graphics</h3>
+            <p class="job-org">Fresno State, Lyles College of Engineering · Contract</p>
             <ul>
-              <li><!-- Bullet --></li>
-              <li><!-- Bullet --></li>
-              <li><!-- Bullet --></li>
+              <li>Taught an introductory course on CAD modeling in AutoCAD and SolidWorks, preparing lecture notes and exams</li>
+              <li>Independently ran laboratory sessions and guided up to 33 first-year engineering students through in-class lab challenges and semester projects</li>
+              <li>Lectured on CAD practices including GD&amp;T, 2D and 3D SolidWorks, motion studies, and 2D and 3D AutoCAD</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">Aug 2026 to Present</div>
+          <div class="job-body">
+            <h3>F3 Innovation Graduate Student Researcher, AI-Guided UGV Stone Fruit Harvesting System</h3>
+            <p class="job-org">Fresno State, Lyles College of Engineering · Apprenticeship</p>
+            <ul>
+              <li>Developing an automated fruit harvesting arm designed to address growing labor shortages in agriculture and reduce the significant produce waste from unharvested crops</li>
+              <li>Use embedded control systems like ESP32s, programmed in C++, to communicate with the subsystems being controlled</li>
+              <li>Organize software components using GitHub</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">Jun 2026 to Present</div>
+          <div class="job-body">
+            <h3>Systems Design Intern</h3>
+            <p class="job-org">Northrop Grumman, Northridge, CA</p>
+            <ul>
+              <li>Proposed subsystem requirements to be rewritten, removed, or restructured for missile defense systems to improve the efficiency of development and reduce the overall cost for the program</li>
+              <li>Created procedural documents to help integrate the entire project architecture for SiAW and delegate systems</li>
+              <li>Utilized DOORS to connect, organize, and structure requirements for SiAW as specifications continued to change</li>
+              <li>Authored change notices for documentation in Teamcenter, updating revisions and assigning specialists to sign off</li>
+              <li>Automated requirements data in DOORS for monthly data collection and analytical tracking</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">Aug 2025 to May 2026</div>
+          <div class="job-body">
+            <h3>LCOE Pathways Tutor</h3>
+            <p class="job-org">Fresno State, Lyles College of Engineering · Part-time</p>
+            <ul>
+              <li>Helped students succeed in their personal education</li>
+              <li>Used social and critical thinking skills to implement various approaches to learning</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">May 2025 to Jul 2025</div>
+          <div class="job-body">
+            <h3>Manufacturing Engineering Intern</h3>
+            <p class="job-org">Northrop Grumman, Northridge, CA</p>
+            <ul>
+              <li>Optimized manufacturing processes within the assembly line, improving manufacturing efficiency for AARGM</li>
+              <li>Initiated purchase orders and worked with Supply Chain to obtain hardware within a reasonable timeframe at a pre-approved cost</li>
+              <li>Addressed nonconformances and proposed rework practices to improve the production and design quality of defense systems</li>
+              <li>Collaborated with quality engineers, program management, and technicians to better organize and address common bottlenecks within existing manufacturing processes</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">Apr 2024 to Apr 2025</div>
+          <div class="job-body">
+            <h3>Engineering Design Intern</h3>
+            <p class="job-org">Lawrence Engineering Group, Fresno, CA</p>
+            <ul>
+              <li>Modeled 40+ architectural designs in Hourly Analysis Program and EnergyPro to test Title 24 energy standards</li>
+              <li>Designed ductwork placement for 10+ new non-residential buildings across the Central Valley using Bluebeam</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="job">
+          <div class="job-when">Jul 2020 to May 2025</div>
+          <div class="job-body">
+            <h3>Private STEAM Tutor</h3>
+            <p class="job-org">Self-employed, Clovis, CA</p>
+            <ul>
+              <li>Designed custom lesson plans and practice exams focused on individual student needs</li>
+              <li>Implemented structured progress tracking and evolving lesson plans that adapted to students' needs to ensure progress</li>
             </ul>
           </div>
         </li>
       </ol>
     </section>
 
-    <!-- ================= PROJECTS ================= -->
-    <section id="projects" class="section wrap">
+    <!-- ================= EXPERTISE ================= -->
+    <section id="expertise" class="section wrap">
       <div class="section-head">
-        <p class="eyebrow">Projects</p>
-        <h2>Selected work</h2>
-      </div>
-
-      <div class="filters" role="group" aria-label="Filter projects">
-        <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter" data-filter="nasa" aria-pressed="false">NASA</button>
-        <button class="filter" data-filter="competition" aria-pressed="false">Competition</button>
-        <button class="filter" data-filter="school" aria-pressed="false">Coursework</button>
-        <button class="filter" data-filter="industry" aria-pressed="false">Industry</button>
-      </div>
-
-      <div class="project-grid">
-        <!-- To add a project: copy one <article> block, fill it in, set data-cat
-             (nasa, competition, school, or industry), and put the image in the images folder. -->
-        <article class="project" data-cat="nasa">
-          <div class="project-img"><img src="images/project-1.jpg" alt="" data-fallback="" loading="lazy"></div>
-          <div class="project-body">
-            <p class="project-tag"><!-- Org, year --></p>
-            <h3><!-- Project title --></h3>
-            <p><!-- Description --></p>
-            <ul class="tools"><li></li></ul>
-            <!-- Optional: <a class="project-link" href="report.pdf" target="_blank" rel="noopener">Link text</a> -->
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ================= SKILLS ================= -->
-    <section id="skills" class="section wrap">
-      <div class="section-head">
-        <p class="eyebrow">Skills</p>
+        <p class="eyebrow">Expertise</p>
         <h2>Tools I use</h2>
       </div>
       <div class="skill-grid">
@@ -185,6 +263,38 @@
       </div>
     </section>
 
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" class="section wrap">
+      <div class="section-head">
+        <p class="eyebrow">Projects</p>
+        <h2>Selected work</h2>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button class="filter is-active" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" data-filter="work" aria-pressed="false">Work</button>
+        <button class="filter" data-filter="competition" aria-pressed="false">Competition</button>
+        <button class="filter" data-filter="school" aria-pressed="false">Coursework</button>
+        <button class="filter" data-filter="industry" aria-pressed="false">Industry</button>
+      </div>
+
+      <div class="project-grid">
+        <!-- To add a project: copy one <article> block, fill it in, set data-cat
+             (work, competition, school, or industry), and put the image in the images folder.
+             To rename a filter, change its label above AND its data-filter value to match data-cat. -->
+        <article class="project" data-cat="work">
+          <div class="project-img"><img src="images/project-1.jpg" alt="" data-fallback="" loading="lazy"></div>
+          <div class="project-body">
+            <p class="project-tag"><!-- Org, year --></p>
+            <h3><!-- Project title --></h3>
+            <p><!-- Description --></p>
+            <ul class="tools"><li></li></ul>
+            <!-- Optional: <a class="project-link" href="report.pdf" target="_blank" rel="noopener">Link text</a> -->
+          </div>
+        </article>
+      </div>
+    </section>
+
     <!-- ================= LEADERSHIP ================= -->
     <section id="leadership" class="section wrap">
       <div class="section-head">
@@ -209,33 +319,15 @@
       </div>
     </section>
 
-    <!-- ================= RECOGNITION ================= -->
-    <section id="recognition" class="section wrap">
-      <div class="section-head">
-        <p class="eyebrow">Recognition</p>
-        <h2>Awards and press</h2>
-      </div>
-      <!-- To add another award or story: copy one <article class="rec-card"> block -->
-      <div class="rec-grid">
-        <article class="rec-card">
-          <p class="rec-type"><!-- Type, year --></p>
-          <h3><!-- Title --></h3>
-          <p><!-- Description --></p>
-          <a href="#" target="_blank" rel="noopener"><!-- Link text --></a>
-        </article>
-      </div>
-    </section>
-
     <!-- ================= CONTACT ================= -->
     <section id="contact" class="contact">
       <div class="wrap">
         <p class="eyebrow">Contact</p>
         <h2>Let's build something.</h2>
-        <p><!-- Short note on what you're open to --></p>
-        <a class="contact-email" href="mailto:"><!-- your@email.com --></a>
-        <div class="hero-links">
-          <a href="#" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a class="contact-email" href="mailto:nataliemaciell2004@gmail.com">nataliemaciell2004@gmail.com</a>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/nataliemaciel-" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/nataliemaciel" target="_blank" rel="noopener">GitHub</a>
           <a href="resume.pdf" target="_blank" rel="noopener">Résumé</a>
         </div>
       </div>
@@ -243,7 +335,7 @@
   </main>
 
   <footer class="footer wrap">
-    <p>© <span id="year"></span> Dana Martinez Gonzalez</p>
+    <p>© <span id="year"></span> Natalie Maria Maciel</p>
     <a href="#top">Back to top</a>
   </footer>
 
