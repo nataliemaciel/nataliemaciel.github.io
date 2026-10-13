@@ -143,9 +143,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* ===== Projects ===== */
 .filters { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2rem; }
-.filter { font: inherit; font-weight: 500; font-size: 0.93rem; padding: 0.45rem 1.1rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; transition: background 0.15s, color 0.15s; }
-.filter:hover { border-color: var(--accent); }
-.filter.is-active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.filter, .exp-tab { font: inherit; font-weight: 500; font-size: 0.93rem; padding: 0.45rem 1.1rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; transition: background 0.15s, color 0.15s; }
+.filter:hover, .exp-tab:hover { border-color: var(--accent); }
+.filter.is-active, .exp-tab.is-active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.8rem; }
 .project { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
 .project[hidden] { display: none; }
@@ -298,8 +298,15 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
       <div class="section-head">
         <h2>Experience</h2>
       </div>
+
+      <div class="filters" role="group" aria-label="Filter experience">
+        <button class="exp-tab is-active" data-exp="all" aria-pressed="true">All</button>
+        <button class="exp-tab" data-exp="industry" aria-pressed="false">Industry Experience</button>
+        <button class="exp-tab" data-exp="academia" aria-pressed="false">Academia</button>
+      </div>
+
       <!-- Oldest on the left, newest on the right. -->
-      <div class="ht-scroll">
+      <div class="ht-scroll" data-panel="all">
         <ol class="htimeline" style="--n:7">
           <li class="ht">
             <div class="ht-top"><div class="ht-text"><h3>Private STEAM Tutor</h3><p>Self-employed</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div class="ht-stem"></div></div>
@@ -337,6 +344,44 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
             <div class="ht-bottom"><p class="ht-date">Aug 2026 - Present</p></div>
           </li>
         </ol>
+      </div>
+      <div class="ht-scroll" data-panel="industry" hidden>
+          <ol class="htimeline compact" style="--n:3">
+            <li class="ht">
+              <div class="ht-top"><div class="ht-text"><h3>HVAC Design Engineering Intern</h3><p>Lawrence Engineering Group</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg></div><div class="ht-stem"></div></div>
+              <div class="ht-rail"></div>
+              <div class="ht-bottom"><p class="ht-date">Apr 2024 - Mar 2025</p></div>
+            </li>
+            <li class="ht">
+              <div class="ht-top"><p class="ht-date">May 2025 - Jul 2025</p></div>
+              <div class="ht-rail"></div>
+              <div class="ht-bottom"><div class="ht-stem"></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div><div class="ht-text"><h3>Manufacturing Engineering Intern</h3><p>Northrop Grumman</p></div></div>
+            </li>
+            <li class="ht is-current">
+              <div class="ht-top"><div class="ht-text"><h3>Systems Design Intern</h3><p>Northrop Grumman</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div><div class="ht-stem"></div></div>
+              <div class="ht-rail"></div>
+              <div class="ht-bottom"><p class="ht-date">Jun 2026 - Present</p></div>
+            </li>
+          </ol>
+      </div>
+      <div class="ht-scroll" data-panel="academia" hidden>
+          <ol class="htimeline compact" style="--n:3">
+            <li class="ht">
+              <div class="ht-top"><div class="ht-text"><h3>LCOE Pathways Tutor</h3><p>Fresno State, Lyles College of Engineering</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div class="ht-stem"></div></div>
+              <div class="ht-rail"></div>
+              <div class="ht-bottom"><p class="ht-date">Aug 2025 - May 2026</p></div>
+            </li>
+            <li class="ht">
+              <div class="ht-top"><p class="ht-date">Aug 2026 - Present</p></div>
+              <div class="ht-rail"></div>
+              <div class="ht-bottom"><div class="ht-stem"></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div class="ht-text"><h3>AY Teaching Associate, Engineering Graphics</h3><p>Fresno State, Lyles College of Engineering</p></div></div>
+            </li>
+            <li class="ht is-current">
+              <div class="ht-top"><div class="ht-text"><h3>F3 Innovation Graduate Student Researcher, AI-Guided UGV Stone Fruit Harvesting System</h3><p>Fresno State, Lyles College of Engineering</p></div><div class="ht-circle"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6L5 19a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2l-5-10V3"/><path d="M7.5 15h9"/></svg></div><div class="ht-stem"></div></div>
+              <div class="ht-rail"></div>
+              <div class="ht-bottom"><p class="ht-date">Aug 2026 - Present</p></div>
+            </li>
+          </ol>
       </div>
     </section>
 
@@ -566,6 +611,20 @@ document.querySelectorAll('.poster').forEach(btn => {
 });
 lightbox.addEventListener('click', e => {
   if (e.target === lightbox || e.target.closest('.lightbox-close')) lightbox.close();
+});
+  
+// Experience tabs
+const expTabs = document.querySelectorAll('.exp-tab');
+const expPanels = document.querySelectorAll('[data-panel]');
+expTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    expTabs.forEach(t => {
+      const active = t === tab;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-pressed', String(active));
+    });
+    expPanels.forEach(p => { p.hidden = p.dataset.panel !== tab.dataset.exp; });
+  });
 });
   </script>
 </body>
